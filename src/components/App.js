@@ -26,6 +26,15 @@ export default class App extends Component{
         this.setState({burgers:sampleBurgers})
     }
 
+    addToOrder=(key)=>{
+        // 1. Копию ебєкту state
+        const order={...this.state.order}
+        // 2. Добавляєм ключ до замовлення зі значенням 1, або обновити його значення
+        order[key] = order[key] + 1 || 1
+        // 3. Записуємо наш новий обєкт order в state
+        this.setState({order:order})
+    }
+
     render(){
         return(
             <div className="burger-paradise">
@@ -38,7 +47,7 @@ export default class App extends Component{
                             return <Burger 
                             key={key}
                             index={key}
-                            details={this.state.burgers[key]}
+                            details={this.state.burgers[key]} addToOrder={this.addToOrder}
                             />
                         })}
                     </ul>
